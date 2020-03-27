@@ -75,10 +75,10 @@ userSchema.methods.generatorToken=function(cb){
 
 userSchema.statics.findByToken = function(token, cb){
   var user=this;
-
+//토큰 decode
   jwt.verify(token,'secretToken', function(err, decoded){
-    //userid로 토큰찾아서 클라이언트 토큰과일치여부 확인
-    user.findOne({"_id":decoded, "token":token},function(err,cb){
+    //userid로 토큰찾아서 클라이언트 토큰과 일치여부 확인
+    user.findOne({"_id":decoded, "token":token},function(err,user){
       if(err ) return cb(err);
       cb(null, user);
     })
